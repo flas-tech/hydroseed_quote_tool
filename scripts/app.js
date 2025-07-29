@@ -1,13 +1,20 @@
 function getSettings(){
   const defaults = {
-    fuelCost:3.50, laborRate:30, truckMPG:10,
-    equipRates:{ hydro:100, skid:80, excav:120, custom:90 },
-    waterTruckFee:200,
-    profitMargin:{ hydro:15, skid:15, excav:15, custom:15 },
-    markupPrefs:{ enabled:false, laborMarkup:0, materialsMarkup:0, overheadFlat:0 }
+    fuelCost: 3.50,
+    laborRate: 30,
+    truckMPG: 10,
+    equipRates: { hydro: 100, skid: 80, excav: 120, custom: 90 },
+    waterTruckFee: 200,
+    profitMargin: { hydro: 15, skid: 15, excav: 15, custom: 15 },
+    markupPrefs: { enabled: false, laborMarkup: 0, materialsMarkup: 0, overheadFlat: 0 },
+    mulchCost: 140,
+    tackifierCost: 16.67,
+    dyeCost: 35,
+    hydroFuelPerTank: 2,
+    numEmployees: 3
   };
   const s = localStorage.getItem('quoteSettings');
-  if(s) try{ return JSON.parse(s); }catch{}
+  if(s) try { return JSON.parse(s); } catch {}
   return defaults;
 }
 function saveSettings(settings){
