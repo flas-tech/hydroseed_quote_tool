@@ -1,65 +1,32 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Equipment Quote</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial‑scale=1">
+  <title>Skid Steer Quote</title>
   <link rel="stylesheet" href="../styles/style.css">
-  <script src="../scripts/app.js"></script>
 </head>
-<body>
-  <h2>Equipment Quote</h2>
-
-  <label>Hours of Operation:
-    <input type="number" id="hours" required>
-  </label>
-
-  <label>Round-Trip Distance (miles):
-    <input type="number" id="distance" required>
-  </label>
-
-  <label>
-    <input type="checkbox" id="addAttachments" onchange="toggleAttachments()"> Include Attachments
-  </label>
-
-  <div id="attachments" style="display:none;">
-    <h4>Attachments</h4>
-    <div id="attachmentList"></div>
-    <button onclick="addAttachmentOption('attachmentList')">Add Attachment</button>
+<body data-equip="skid">
+  <button class="toggle-mode">🌓</button>
+  <h1>Skid Steer Quote</h1>
+  <form class="input-grid">
+    <label>Distance (mi): <input id="distance" type="number" step="0.1"></label>
+  </form>
+  <div id="jobDetails" class="additional-inputs">
+    <label>Job Days: <input id="days" type="number" step="1" value="1"></label>
+    <label>Crews: <input id="crews" type="number" step="1" value="1"></label>
+    <label>Daily Hours per Crew: <input id="dailyHours" type="number" step="0.1" value="8"></label>
   </div>
-
-  <br><button onclick="runQuote()">Calculate</button>
-  <button onclick="window.print()">🖨️ Print Quote</button>
-
-  <div id="output"></div>
-
-  <script>
-    function toggleAttachments() {
-      document.getElementById("attachments").style.display =
-        document.getElementById("addAttachments").checked ? "block" : "none";
-    }
-
-    function runQuote() {
-      const hours = parseFloat(document.getElementById("hours").value);
-      const distance = parseFloat(document.getElementById("distance").value);
-      const useAttachments = document.getElementById("addAttachments").checked;
-
-      const attachments = [];
-      if (useAttachments) {
-        document.querySelectorAll("#attachmentList div").forEach(div => {
-          const name = div.querySelector(".attachment-name").value;
-          const cost = div.querySelector(".attachment-cost").value;
-          attachments.push({ name, cost });
-        });
-      }
-
-      const result = calculateQuote(hours, distance, useAttachments, attachments);
-
-      document.getElementById("output").innerHTML = `
-        <strong>Total Quote:</strong> $${result.total}<br>
-        <strong>Total Profit:</strong> $${result.profit}<br>
-        <strong>Subtotal:</strong> $${result.subtotal}
-      `;
-    }
-  </script>
+  <label><input id="useMarkup" type="checkbox"> Use markup instead of profit margin</label>
+  <div id="markupFields" class="additional-inputs" style="display:none;">
+    <label>Labor Markup (%): <input id="laborMarkup" type="number" step="0.1"></label>
+    <label>Materials Markup (%): <input id="materialsMarkup" type="number" step="0.1"></label>
+    <label>Flat‑rate Overhead ($): <input id="overheadFlat" type="number" step="0.01"></label>
+  </div>
+  <label><input id="includeAttachments" type="checkbox"> Include Attachments</label>
+  <div id="attachmentsContainer" class="attachments" style="display:none;"></div>
+  <button type="button" id="addAttachment">Add Attachment</button>
+  <button type="button" id="calculate">Calculate</button>
+  <div id="summary" class="summary"></div>
+  <button type="button" onclick="window.print()">🖨️ Print Quote</button>
+  <script src="../scripts/app.js"></script>
 </body>
 </html>
