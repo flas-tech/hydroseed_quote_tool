@@ -1,1 +1,60 @@
-<!-- settings page for fixed costs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Settings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+  <h2>Fixed Operating Costs Settings</h2>
+
+  <label>Fuel Cost ($/gal):
+    <input id="fuelCost" type="number" step="0.01" />
+  </label>
+
+  <label>Labor Rate ($/hr):
+    <input id="laborRate" type="number" step="0.01" />
+  </label>
+
+  <label>Truck MPG:
+    <input id="truckMPG" type="number" step="1" />
+  </label>
+
+  <label>Equipment Hourly Rate ($/hr):
+    <input id="equipmentHourlyRate" type="number" step="0.01" />
+  </label>
+
+  <label>Water Truck Flat Fee:
+    <input id="waterTruckFee" type="number" step="1" />
+  </label>
+
+  <label>Default Profit Margin (%):
+    <input id="defaultProfit" type="number" step="1" />
+  </label>
+
+  <br><button onclick="saveSettings()">💾 Save Settings</button>
+
+  <script>
+    function loadSettings() {
+      document.getElementById("fuelCost").value = localStorage.getItem("fuelCost") || 4.25;
+      document.getElementById("laborRate").value = localStorage.getItem("laborRate") || 25;
+      document.getElementById("truckMPG").value = localStorage.getItem("truckMPG") || 10;
+      document.getElementById("equipmentHourlyRate").value = localStorage.getItem("equipmentHourlyRate") || 85;
+      document.getElementById("waterTruckFee").value = localStorage.getItem("waterTruckFee") || 150;
+      document.getElementById("defaultProfit").value = localStorage.getItem("defaultProfit") || 20;
+    }
+
+    function saveSettings() {
+      localStorage.setItem("fuelCost", document.getElementById("fuelCost").value);
+      localStorage.setItem("laborRate", document.getElementById("laborRate").value);
+      localStorage.setItem("truckMPG", document.getElementById("truckMPG").value);
+      localStorage.setItem("equipmentHourlyRate", document.getElementById("equipmentHourlyRate").value);
+      localStorage.setItem("waterTruckFee", document.getElementById("waterTruckFee").value);
+      localStorage.setItem("defaultProfit", document.getElementById("defaultProfit").value);
+      alert("✅ Settings saved successfully!");
+    }
+
+    window.onload = loadSettings;
+  </script>
+</body>
+</html><!-- settings page for fixed costs -->
