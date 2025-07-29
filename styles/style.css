@@ -1,60 +1,44 @@
-
+:root {
+  --bg: #ffffff; --fg: #222222; --card-bg: #f9f9f9;
+  --btn-bg: #007bff; --btn-hover: #0056b3;
+}
+[data-theme="dark"] {
+  --bg: #121212; --fg: #e0e0e0;
+  --card-bg: #1e1e1e; --btn-bg: #1a73e8; --btn-hover: #185abc;
+}
 body {
-  font-family: Arial, sans-serif;
-  margin: 10px;
-  padding: 10px;
-  background: #f9f9f9;
-  color: #333;
+  background: var(--bg); color: var(--fg);
+  margin: 0; font-family: sans-serif;
+  padding: 16px; max-width: 480px; margin: auto;
 }
-
-h2, h4 {
-  color: #2d7d46;
+.toggle-mode {
+  position: fixed; top: 1rem; right: 1rem;
+  background: none; border: none; color: var(--fg);
+  font-size: 1.2em;
 }
-
-label {
-  display: block;
-  margin: 10px 0 5px;
-}
-
-input, select, button {
-  width: 100%;
-  max-width: 400px;
-  padding: 10px;
-  margin-bottom: 15px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
+h1 { font-size: 1.5em; margin-bottom: 1em; }
+nav ul { list-style: none; padding: 0; }
+nav li { margin-bottom: 0.5em; }
+nav a { color: var(--btn-bg); text-decoration: none; }
+form { background: var(--card-bg); padding: 16px; border-radius: 8px; margin-bottom: 20px; }
+.input-grid { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+.input-grid label { display: flex; flex-direction: column; }
+label { margin: 0; }
+input[type="text"], input[type="number"] { width: 100%; padding: 8px; margin-top: 4px; }
 button {
-  background-color: #2d7d46;
-  color: white;
-  border: none;
-  cursor: pointer;
+  margin-top: 16px; padding: 12px;
+  width: 100%; background: var(--btn-bg);
+  color: #fff; border: none; font-size: 1em; border-radius: 4px;
 }
-
-button:hover {
-  background-color: #256637;
-}
-
-#output {
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-top: 20px;
-  border-radius: 5px;
-}
-
+button:hover { background: var(--btn-hover); }
+.attachments { margin-top: 1em; }
+.attachment-row { display: flex; gap: 8px; margin-top: 8px; }
+.attachment-row input { flex: 1; }
+.summary { margin-top: 1em; background: var(--card-bg); padding: 12px; border-radius: 4px; }
+.summary div { margin-bottom: 0.5em; }
+.additional-inputs { display: grid; gap: 12px; margin-top: 12px; grid-template-columns: 1fr 1fr; }
 @media print {
-  body {
-    background: white;
-    color: black;
-  }
-
-  button, input, select {
-    display: none;
-  }
-
-  #output {
-    border: none;
-  }
+  button, input, label, .attachments, nav, .toggle-mode, form,
+  .additional-inputs, #markupFields, #jobDetails { display: none !important; }
+  body { padding: 0; }
 }
